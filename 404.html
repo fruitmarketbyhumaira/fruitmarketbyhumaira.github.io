@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Fruit Market | Buah Segar Pilihan</title>
+    <style>
+        /* ==============================
+           CSS DASAR & ANIMASI
+           ============================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        nav {
+            background-color: #27ae60;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('background.jpeg');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero h1 { font-size: 3rem; margin-bottom: 10px; animation: fadeInDown 1s; }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.2rem;
+            color: #27ae60;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+            padding-bottom: 25px;
+            border: 1px solid #eee;
+        }
+
+        .card:hover { 
+            transform: translateY(-15px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .card img { 
+            width: 100%; 
+            height: 220px; 
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .card:hover img { transform: scale(1.05); }
+
+        .card h3 { margin: 15px 0 5px; color: #2c3e50; font-size: 1.4rem; }
+        .card p { color: #7f8c8d; font-size: 0.95rem; margin-bottom: 10px; padding: 0 15px; height: 40px; }
+
+        /* Style Baru untuk Harga */
+        .price {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+
+        .btn-buy {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-buy:hover { 
+            background-color: #d35400; 
+            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+        }
+
+        /* ==============================
+           MISSION PASSED ANIMATION STYLES
+           ============================== */
+        #mission-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 9998;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        #mission-passed-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 9999;
+            display: none;
+            width: 100%;
+            pointer-events: none;
+        }
+
+        .mission-text {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: clamp(50px, 10vw, 100px);
+            font-weight: bold;
+            color: #f1c40f;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 4px 4px 0 #000;
+            margin-bottom: 10px;
+        }
+
+        .respect-text {
+            font-family: 'Courier New', monospace;
+            font-size: clamp(30px, 5vw, 50px);
+            color: #27ae60;
+            font-weight: bold;
+            opacity: 0;
+        }
+
+        @keyframes missionZoomIn {
+            0% { transform: translate(-50%, -50%) scale(5); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        @keyframes respectAppear {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        #mission-passed-container.animate {
+            display: block;
+            animation: missionZoomIn 0.4s ease-out forwards;
+        }
+
+        #mission-passed-container.animate .respect-text {
+            animation: respectAppear 0.3s ease-out 0.5s forwards;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==============================
+        CART STYLES
+        ============================== */
+        .cart-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #27ae60;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #e67e22;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        #cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100%;
+            background: rgb(40, 40, 40);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            z-index: 1001;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #cart-sidebar.active { right: 0; }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #000000;
+        }
+
+        .btn-checkout {
+            background: #27ae60;
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .close-cart {
+            cursor: pointer;
+            float: right;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mission-overlay"></div>
+    <div id="mission-passed-container">
+        <div class="mission-text">HORE ADA YANG ORDER</div>
+        <div class="respect-text">TERIMAKASIH</div>
+    </div>
+
+    <nav>
+        <div style="font-size: 1.5rem; font-weight: bold;">
+            🍎 FreshFruit Market
+        </div>
+        <div style="display: flex; gap: 20px;">
+            <a href="#" style="color: white; text-decoration: none; font-weight: 500;">Beranda</a>
+            <a href="#produk" style="color: white; text-decoration: none; font-weight: 500;">Produk</a>
+            <a href="#kontak" style="color: white; text-decoration: none; font-weight: 500;">Kontak</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Buah Segar Langsung ke Rumah</h1>
+        <p>Kualitas Premium dari Petani Lokal Terbaik</p>
+    </header>
+
+    <div class="container" id="produk">
+        <h2 class="section-title">Produk Kami</h2>
+        
+        <div class="grid">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=500&q=80" alt="Apel Manis">
+                <h3>Apel Manis</h3>
+                <p>Renyah, manis, dan kaya vitamin.</p>
+                <span class="price">Rp 35.000 / kg</span>
+                <button class="btn-buy" onclick="orderWhatsApp('Apel Manis', 35000)">Tambah ke Keranjang</button>
+            </div>
+
+            <div class="card">
+                <img src="pisang.jpeg" alt="Pisang">
+                <h3>Pisang</h3>
+                <p>Tekstur lembut dengan rasa yang legit.</p>
+                <span class="price">Rp 20.000 / sisir</span>
+                <button class="btn-buy" onclick="orderWhatsApp('Pisang', 20000)">Tambah ke Keranjang</button>
+            </div>
+
+            <div class="card">
+                <img src="Salak Pondoh.jpeg" alt="Salak">
+                <h3>Salak Pondoh</h3>
+                <p>Manis, garing, dan tidak sepat.</p>
+                <span class="price">Rp 15.000 / kg</span>
+                <button class="btn-buy" onclick="orderWhatsApp('Salak Pondoh', 15000)">Tambah ke Keranjang</button>
+            </div>
+
+            <div class="card">
+                <img src="jambu kristal.jpeg" alt="Jambu Kristal">
+                <h3>Jambu Kristal</h3>
+                <p>Renyah hampir tanpa biji, sangat segar.</p>
+                <span class="price">Rp 25.000 / kg</span>
+                <button class="btn-buy" onclick="orderWhatsApp('Jambu Kristal', 25000)">Tambah ke Keranjang</button>
+            </div>
+
+            <div class="card">
+                <img src="jeruk.jpeg" alt="Jeruk">
+                <h3>Jeruk</h3>
+                <p>Segar dan manis.</p>
+                <span class="price">Rp 22.000 / kg</span>
+                <button class="btn-buy" onclick="orderWhatsApp('Jeruk', 22000)">Tambah ke Keranjang</button>
+            </div>
+
+            <div class="card">
+                <img src="semangka.jpeg" alt="Semangka">
+                <h3>Semangka</h3>
+                <p>Berair dan manis.</p>
+                <span class="price">Rp 13.000 / kg</span>
+                <button class="btn-buy" onclick="orderWhatsApp('Semangka', 13000)">Tambah ke Keranjang</button>
+            </div>
+
+            <div class="card">
+                <img src="mangga.jpeg" alt="Mangga">
+                <h3>Mangga</h3>
+                <p>Asam Manis Dan Segar.</p>
+                <span class="price">Rp 20.000 / kg</span>
+                <button class="btn-buy" onclick="orderWhatsApp('Mangga', 20000)">Tambah ke Keranjang</button>
+            </div>
+
+            <div class="card">
+                <img src="alpukat.jpeg" alt="Alpukat">
+                <h3>Alpukat</h3>
+                <p>Lembut dan gurih.</p>
+                <span class="price">Rp 30.000 / kg</span>
+                <button class="btn-buy" onclick="orderWhatsApp('Alpukat', 30000)">Tambah ke Keranjang</button>
+            </div>
+
+            <div class="card">
+                <img src="anggur.jpeg" alt="Anggur">
+                <h3>Anggur RGB</h3>
+                <p>Manis dan kecut, memiliki banyak warna.</p>
+                <span class="price">Rp 40.000 / kg</span>
+                <button class="btn-buy" onclick="orderWhatsApp('Anggur', 40000)">Tambah ke Keranjang</button>
+            </div>
+
+            <div class="card">
+                <img src="naga.jpeg" alt="Naga">
+                <h3>Naga</h3>
+                <p>Manis dan berair.</p>
+                <span class="price">Rp 12.000 / kg</span>
+                <button class="btn-buy" onclick="orderWhatsApp('Naga', 12000)">Tambah ke Keranjang</button>
+            </div>
+
+            <div class="card">
+                <img src="nanas.jpeg" alt="Nanas">
+                <h3>Nanas</h3>
+                <p>Manis dan sedikit kasar.</p>
+                <span class="price">Rp 10.000 / biji</span>
+                <button class="btn-buy" onclick="orderWhatsApp('Nanas', 10000)">Tambah ke Keranjang</button>
+            </div>
+
+            <div class="card">
+                <img src="strawbary.jpeg" alt="Strawbery">
+                <h3>Strawbery</h3>
+                <p>Manis sekali.</p>
+                <span class="price">Rp 35.000 / kg</span>
+                <button class="btn-buy" onclick="orderWhatsApp('Strawbery', 35000)">Tambah ke Keranjang</button>
+            </div>
+        </div>
+    </div>
+
+    <hr> <footer style="background-color: #2c3e50; color: white; padding: 40px 20px; font-family: sans-serif;" id="kontak">
+    
+    <table width="100%" border="0" cellspacing="0" cellpadding="10">
+        <tr>
+            <td width="33%" valign="top">
+                <h3 style="color: #27ae60;">🍎 FreshFruit Market</h3>
+                <p style="font-size: 14px; line-height: 1.6;">
+                    Menyediakan buah-buahan kualitas premium langsung dari petani lokal untuk kesehatan keluarga Anda.
+                </p>
+            </td>
+
+            <td width="33%" valign="top">
+                <h4 style="border-bottom: 2px solid #27ae60; display: inline-block;">Link Cepat</h4>
+                <ul style="list-style: none; padding: 0; font-size: 14px;">
+                    <li><a href="#" style="color: #bdc3c7; text-decoration: none;">Beranda</a></li>
+                    <li><a href="#produk" style="color: #bdc3c7; text-decoration: none;">Produk</a></li>
+                    <li><a href="#kontak" style="color: #bdc3c7; text-decoration: none;">Kontak</a></li>
+                </ul>
+            </td>
+
+            <td width="33%" valign="top">
+                <h4 style="border-bottom: 2px solid #27ae60; display: inline-block;">Hubungi Kami</h4>
+                <p style="font-size: 14px;">
+                    📍 Jember<br>
+                    📞 +62 857-2668-3009<br>
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    <hr style="border: 0; border-top: 1px solid #34495e; margin-top: 20px;">
+
+    <center>
+        <p style="font-size: 12px; color: #7f8c8d; margin-top: 20px;">
+            &copy; 2026 FreshFruit Market - Pilihan Terbaik Keluarga Indonesia
+        </p>
+    </center>
+
+    <div class="cart-float" onclick="toggleCart()">
+    🛒 <span class="cart-count" id="cart-count">0</span>
+    </div>
+
+    <div id="cart-sidebar">
+        <span class="close-cart" onclick="toggleCart()">&times;</span>
+        <h2>Keranjang Belanja</h2>
+        <div class="cart-items" id="cart-items">
+            </div>
+        <div style="margin-top: 20px; border-top: 2px solid #eee; padding-top: 10px;">
+            <p><strong>Total: <span id="cart-total">Rp 0</span></strong></p>
+            <button class="btn-checkout" onclick="checkoutWhatsApp()">Pesan via WhatsApp</button>
+        </div>
+    </div>
+
+</footer>
+
+    <script>
+        function orderWhatsApp(namaBuah) {
+            const phoneNumber = "6285726683009"; 
+            const message = `Halo FreshFruit Market, saya ingin memesan produk: ${namaBuah}. Bagaimana cara pembayarannya?`;
+            const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+            const overlay = document.getElementById('mission-overlay');
+            const container = document.getElementById('mission-passed-container');
+
+            overlay.style.display = 'block';
+            setTimeout(() => { overlay.style.opacity = '1'; }, 10);
+            container.classList.add('animate');
+
+            setTimeout(() => {
+                overlay.style.opacity = '0';
+                setTimeout(() => { 
+                    overlay.style.display = 'none'; 
+                    container.classList.remove('animate');
+                    window.open(waUrl, '_blank');
+                }, 500);
+            }, 3000);
+        }
+
+        let cart = [];
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('active');
+        }
+
+        function orderWhatsApp(namaBuah, harga) {
+            // Fungsi 'Beli' sekarang menambah ke keranjang
+            const itemIndex = cart.findIndex(item => item.name === namaBuah);
+            
+            if (itemIndex > -1) {
+                cart[itemIndex].qty += 1;
+            } else {
+                cart.push({ name: namaBuah, price: harga, qty: 1 });
+            }
+            
+            updateCartUI();
+            
+            // Opsional: Tampilkan animasi sukses kecil atau buka sidebar
+            // toggleCart(); 
+        }
+
+        function updateCartUI() {
+            const cartItemsElement = document.getElementById('cart-items');
+            const cartCountElement = document.getElementById('cart-count');
+            const cartTotalElement = document.getElementById('cart-total');
+            
+            cartItemsElement.innerHTML = '';
+            let total = 0;
+            let count = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price * item.qty;
+                count += item.qty;
+                cartItemsElement.innerHTML += `
+                    <div class="cart-item">
+                        <div>
+                            <strong>${item.name}</strong><br>
+                            ${item.qty} x Rp ${item.price.toLocaleString()}
+                        </div>
+                        <button onclick="removeItem(${index})" style="background:none; border:none; color:red; cursor:pointer;">Hapus</button>
+                    </div>
+                `;
+            });
+
+            cartCountElement.innerText = count;
+            cartTotalElement.innerText = `Rp ${total.toLocaleString()}`;
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert("Keranjang masih kosong!");
+                return;
+            }
+
+            const phoneNumber = "6285726683009";
+            let listBelanja = "";
+            let totalHarga = 0;
+
+            cart.forEach(item => {
+                listBelanja += `- ${item.name} (${item.qty}x)\n`;
+                totalHarga += item.price * item.qty;
+            });
+
+            const message = `Halo FreshFruit Market, saya mau pesan:\n\n${listBelanja}\nTotal: Rp ${totalHarga.toLocaleString()}\n\nBagaimana cara pembayarannya?`;
+            const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+            // Menjalankan animasi GTA Mission Passed Anda
+            const overlay = document.getElementById('mission-overlay');
+            const container = document.getElementById('mission-passed-container');
+
+            overlay.style.display = 'block';
+            setTimeout(() => { overlay.style.opacity = '1'; }, 10);
+            container.classList.add('animate');
+
+            setTimeout(() => {
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    container.classList.remove('animate');
+                    window.open(waUrl, '_blank');
+                }, 500);
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
