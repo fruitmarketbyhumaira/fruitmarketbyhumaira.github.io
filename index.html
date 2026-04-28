@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,12 +32,12 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                        url('background.jpeg');
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url('background.jpeg');
             background-size: cover;
             background-position: center;
             height: 50vh;
@@ -49,7 +50,11 @@
             padding: 0 20px;
         }
 
-        .hero h1 { font-size: 3rem; margin-bottom: 10px; animation: fadeInDown 1s; }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            animation: fadeInDown 1s;
+        }
 
         .container {
             max-width: 1200px;
@@ -74,29 +79,42 @@
             background: white;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             text-align: center;
             padding-bottom: 25px;
             border: 1px solid #eee;
         }
 
-        .card:hover { 
+        .card:hover {
             transform: translateY(-15px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
 
-        .card img { 
-            width: 100%; 
-            height: 220px; 
+        .card img {
+            width: 100%;
+            height: 220px;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-        
-        .card:hover img { transform: scale(1.05); }
 
-        .card h3 { margin: 15px 0 5px; color: #2c3e50; font-size: 1.4rem; }
-        .card p { color: #7f8c8d; font-size: 0.95rem; margin-bottom: 10px; padding: 0 15px; height: 40px; }
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card h3 {
+            margin: 15px 0 5px;
+            color: #2c3e50;
+            font-size: 1.4rem;
+        }
+
+        .card p {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            padding: 0 15px;
+            height: 40px;
+        }
 
         /* Style Baru untuk Harga */
         .price {
@@ -120,8 +138,8 @@
             display: inline-block;
         }
 
-        .btn-buy:hover { 
-            background-color: #d35400; 
+        .btn-buy:hover {
+            background-color: #d35400;
             box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
         }
 
@@ -173,13 +191,27 @@
         }
 
         @keyframes missionZoomIn {
-            0% { transform: translate(-50%, -50%) scale(5); opacity: 0; }
-            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            0% {
+                transform: translate(-50%, -50%) scale(5);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
         }
 
         @keyframes respectAppear {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         #mission-passed-container.animate {
@@ -200,8 +232,15 @@
         }
 
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* ==============================
@@ -220,7 +259,7 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             z-index: 1000;
         }
 
@@ -241,7 +280,7 @@
             width: 350px;
             height: 100%;
             background: rgb(40, 40, 40);
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
             transition: 0.3s;
             z-index: 1001;
             padding: 20px;
@@ -249,7 +288,9 @@
             flex-direction: column;
         }
 
-        #cart-sidebar.active { right: 0; }
+        #cart-sidebar.active {
+            right: 0;
+        }
 
         .cart-items {
             flex: 1;
@@ -282,6 +323,7 @@
             float: right;
             font-size: 24px;
         }
+
         /* ==============================
         VISITOR COUNTER STYLES
         ============================== */
@@ -312,9 +354,17 @@
         }
 
         @keyframes pulse-green {
-            0% { box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(39, 174, 96, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(39, 174, 96, 0); }
+            0% {
+                box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(39, 174, 96, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(39, 174, 96, 0);
+            }
         }
 
         .visitor-count-text {
@@ -328,6 +378,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div id="mission-overlay"></div>
@@ -354,10 +405,11 @@
 
     <div class="container" id="produk">
         <h2 class="section-title">Produk Kami</h2>
-        
+
         <div class="grid">
             <div class="card">
-                <img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=500&q=80" alt="Apel Manis">
+                <img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=500&q=80"
+                    alt="Apel Manis">
                 <h3>Apel Manis</h3>
                 <p>Renyah, manis, dan kaya vitamin.</p>
                 <span class="price">Rp 35.000 / kg</span>
@@ -454,69 +506,71 @@
         </div>
     </div>
 
-    <hr> <footer style="background-color: #2c3e50; color: white; padding: 40px 20px; font-family: sans-serif;" id="kontak">
-    
-    <table width="100%" border="0" cellspacing="0" cellpadding="10">
-        <tr>
-            <td width="33%" valign="top">
-                <h3 style="color: #27ae60;">🍎 FreshFruit Market</h3>
-                <p style="font-size: 14px; line-height: 1.6;">
-                    Menyediakan buah-buahan kualitas premium langsung dari petani lokal untuk kesehatan keluarga Anda.
-                </p>
-            </td>
+    <hr>
+    <footer style="background-color: #2c3e50; color: white; padding: 40px 20px; font-family: sans-serif;" id="kontak">
 
-            <td width="33%" valign="top">
-                <h4 style="border-bottom: 2px solid #27ae60; display: inline-block;">Link Cepat</h4>
-                <ul style="list-style: none; padding: 0; font-size: 14px;">
-                    <li><a href="#" style="color: #bdc3c7; text-decoration: none;">Beranda</a></li>
-                    <li><a href="#produk" style="color: #bdc3c7; text-decoration: none;">Produk</a></li>
-                    <li><a href="#kontak" style="color: #bdc3c7; text-decoration: none;">Kontak</a></li>
-                </ul>
-            </td>
+        <table width="100%" border="0" cellspacing="0" cellpadding="10">
+            <tr>
+                <td width="33%" valign="top">
+                    <h3 style="color: #27ae60;">🍎 FreshFruit Market</h3>
+                    <p style="font-size: 14px; line-height: 1.6;">
+                        Menyediakan buah-buahan kualitas premium langsung dari petani lokal untuk kesehatan keluarga
+                        Anda.
+                    </p>
+                </td>
 
-            <td width="33%" valign="top">
-                <h4 style="border-bottom: 2px solid #27ae60; display: inline-block;">Hubungi Kami</h4>
-                <p style="font-size: 14px;">
-                    📍 Jember<br>
-                    📞 +62 857-2668-3009<br>
-                </p>
-            </td>
-        </tr>
-    </table>
+                <td width="33%" valign="top">
+                    <h4 style="border-bottom: 2px solid #27ae60; display: inline-block;">Link Cepat</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 14px;">
+                        <li><a href="#" style="color: #bdc3c7; text-decoration: none;">Beranda</a></li>
+                        <li><a href="#produk" style="color: #bdc3c7; text-decoration: none;">Produk</a></li>
+                        <li><a href="#kontak" style="color: #bdc3c7; text-decoration: none;">Kontak</a></li>
+                    </ul>
+                </td>
 
-    <hr style="border: 0; border-top: 1px solid #34495e; margin-top: 20px;">
+                <td width="33%" valign="top">
+                    <h4 style="border-bottom: 2px solid #27ae60; display: inline-block;">Hubungi Kami</h4>
+                    <p style="font-size: 14px;">
+                        📍 Jember<br>
+                        📞 +62 857-2668-3009<br>
+                    </p>
+                </td>
+            </tr>
+        </table>
 
-    <center>
-        <div class="visitor-counter">
-            <span class="visitor-dot"></span>
-            <span class="visitor-count-text">Jumlah Pengunjung: <span id="visitor-number">...</span></span>
-        </div>
+        <hr style="border: 0; border-top: 1px solid #34495e; margin-top: 20px;">
 
-        <p style="font-size: 12px; color: #7f8c8d; margin-top: 20px;">
-            &copy; 2026 FreshFruit Market - Pilihan Terbaik Keluarga Indonesia
-        </p>
-    </center>
-
-    <div class="cart-float" onclick="toggleCart()">
-    🛒 <span class="cart-count" id="cart-count">0</span>
-    </div>
-
-    <div id="cart-sidebar">
-        <span class="close-cart" onclick="toggleCart()">&times;</span>
-        <h2>Keranjang Belanja</h2>
-        <div class="cart-items" id="cart-items">
+        <center>
+            <div class="visitor-counter">
+                <span class="visitor-dot"></span>
+                <span class="visitor-count-text">Jumlah Pengunjung: <span id="visitor-number">...</span></span>
             </div>
-        <div style="margin-top: 20px; border-top: 2px solid #eee; padding-top: 10px;">
-            <p><strong>Total: <span id="cart-total">Rp 0</span></strong></p>
-            <button class="btn-checkout" onclick="checkoutWhatsApp()">Pesan via WhatsApp</button>
-        </div>
-    </div>
 
-</footer>
+            <p style="font-size: 12px; color: #7f8c8d; margin-top: 20px;">
+                &copy; 2026 FreshFruit Market - Pilihan Terbaik Keluarga Indonesia
+            </p>
+        </center>
+
+        <div class="cart-float" onclick="toggleCart()">
+            🛒 <span class="cart-count" id="cart-count">0</span>
+        </div>
+
+        <div id="cart-sidebar">
+            <span class="close-cart" onclick="toggleCart()">&times;</span>
+            <h2>Keranjang Belanja</h2>
+            <div class="cart-items" id="cart-items">
+            </div>
+            <div style="margin-top: 20px; border-top: 2px solid #eee; padding-top: 10px;">
+                <p><strong>Total: <span id="cart-total">Rp 0</span></strong></p>
+                <button class="btn-checkout" onclick="checkoutWhatsApp()">Pesan via WhatsApp</button>
+            </div>
+        </div>
+
+    </footer>
 
     <script>
         function orderWhatsApp(namaBuah) {
-            const phoneNumber = "6285726683009"; 
+            const phoneNumber = "6285726683009";
             const message = `Halo FreshFruit Market, saya ingin memesan produk: ${namaBuah}. Bagaimana cara pembayarannya?`;
             const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
@@ -529,8 +583,8 @@
 
             setTimeout(() => {
                 overlay.style.opacity = '0';
-                setTimeout(() => { 
-                    overlay.style.display = 'none'; 
+                setTimeout(() => {
+                    overlay.style.display = 'none';
                     container.classList.remove('animate');
                     window.open(waUrl, '_blank');
                 }, 500);
@@ -546,15 +600,15 @@
         function orderWhatsApp(namaBuah, harga) {
             // Fungsi 'Beli' sekarang menambah ke keranjang
             const itemIndex = cart.findIndex(item => item.name === namaBuah);
-            
+
             if (itemIndex > -1) {
                 cart[itemIndex].qty += 1;
             } else {
                 cart.push({ name: namaBuah, price: harga, qty: 1 });
             }
-            
+
             updateCartUI();
-            
+
             // Opsional: Tampilkan animasi sukses kecil atau buka sidebar
             // toggleCart(); 
         }
@@ -563,7 +617,7 @@
             const cartItemsElement = document.getElementById('cart-items');
             const cartCountElement = document.getElementById('cart-count');
             const cartTotalElement = document.getElementById('cart-total');
-            
+
             cartItemsElement.innerHTML = '';
             let total = 0;
             let count = 0;
@@ -635,7 +689,7 @@
                 // Namespace: freshfruitmarket, Key: visitors
                 const response = await fetch('https://api.counterapi.dev/v1/freshfruitmarket/visitors/up');
                 const data = await response.json();
-                
+
                 if (data && data.count) {
                     // Animasi angka bertambah
                     animateValue(visitorNum, 0, data.count, 1500);
@@ -665,4 +719,5 @@
         document.addEventListener('DOMContentLoaded', updateVisitorCount);
     </script>
 </body>
+
 </html>
