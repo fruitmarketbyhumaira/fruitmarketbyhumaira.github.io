@@ -430,8 +430,32 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 15px;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             font-size: 0.85rem;
+        }
+
+        .rating-container {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 0 15px;
+            margin-bottom: 15px;
+        }
+
+        .stars {
+            color: #f1c40f;
+            font-size: 0.9rem;
+        }
+
+        .rating-value {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 0.9rem;
+        }
+
+        .review-count {
+            color: #7f8c8d;
+            font-size: 0.8rem;
         }
 
         .sold-badge {
@@ -735,14 +759,14 @@
     <script>
         // DATA BUAH
         const fruits = [
-            { id: 1, name: 'Salak Pondoh', price: 15000, unit: 'kg', img: 'Salak Pondoh.jpeg', desc: 'Manis, garing, dan tidak sepat.', sold: 156, stock: 45 },
-            { id: 2, name: 'Jambu Kristal', price: 25000, unit: 'kg', img: 'jambu kristal.jpeg', desc: 'Renyah hampir tanpa biji, sangat segar.', sold: 42, stock: 12 },
-            { id: 3, name: 'Semangka', price: 13000, unit: 'kg', img: 'semangka.jpeg', desc: 'Berair dan manis segar.', sold: 67, stock: 10 },
-            { id: 4, name: 'Naga', price: 12000, unit: 'kg', img: 'naga.jpeg', desc: 'Manis dan berair kaya vitamin.', sold: 178, stock: 40 },
-            { id: 5, name: 'Srikaya', price: 45000, unit: 'kg', img: 'srikaya.jpeg', desc: 'Manis intens yang legit.', sold: 56, stock: 30 },
-            { id: 6, name: 'Rambutan', price: 20000, unit: 'kg', img: 'Rambutan.jpeg', desc: 'Manis dan daging buahnya ngelotok.', sold: 89, stock: 25 },
-            { id: 7, name: 'Nangka Madu', price: 35000, unit: 'kg', img: 'nangka.jpeg', desc: 'Manis legit dengan aroma khas.', sold: 34, stock: 15 },
-            { id: 8, name: 'Cherry Fresh', price: 50000, unit: 'kg', img: 'Cherry.jpeg', desc: 'Segar dan manis cocok untuk hiasan.', sold: 12, stock: 8 },
+            { id: 1, name: 'Salak Pondoh', price: 15000, unit: 'kg', img: 'Salak Pondoh.jpeg', desc: 'Manis, garing, dan tidak sepat.', sold: 156, stock: 45, rating: 4.8, reviews: 124 },
+            { id: 2, name: 'Jambu Kristal', price: 25000, unit: 'kg', img: 'jambu kristal.jpeg', desc: 'Renyah hampir tanpa biji, sangat segar.', sold: 42, stock: 12, rating: 4.9, reviews: 38 },
+            { id: 3, name: 'Semangka', price: 13000, unit: 'kg', img: 'semangka.jpeg', desc: 'Berair dan manis segar.', sold: 67, stock: 10, rating: 4.7, reviews: 52 },
+            { id: 4, name: 'Naga', price: 12000, unit: 'kg', img: 'naga.jpeg', desc: 'Manis dan berair kaya vitamin.', sold: 178, stock: 40, rating: 4.9, reviews: 142 },
+            { id: 5, name: 'Srikaya', price: 45000, unit: 'kg', img: 'srikaya.jpeg', desc: 'Manis intens yang legit.', sold: 56, stock: 30, rating: 4.8, reviews: 45 },
+            { id: 6, name: 'Rambutan', price: 20000, unit: 'kg', img: 'Rambutan.jpeg', desc: 'Manis dan daging buahnya ngelotok.', sold: 89, stock: 25, rating: 4.7, reviews: 67 },
+            { id: 7, name: 'Nangka Madu', price: 35000, unit: 'kg', img: 'nangka.jpeg', desc: 'Manis legit dengan aroma khas.', sold: 34, stock: 15, rating: 4.9, reviews: 29 },
+            { id: 8, name: 'Cherry Fresh', price: 50000, unit: 'kg', img: 'Cherry.jpeg', desc: 'Segar dan manis cocok untuk hiasan.', sold: 12, stock: 8, rating: 5.0, reviews: 18 },
         ];
 
         let cart = [];
@@ -765,6 +789,11 @@
                         <div class="card-meta">
                             <span class="sold-badge">${fruit.sold} Terjual</span>
                             <span class="stock-info ${stockClass}">${stockText}</span>
+                        </div>
+                        <div class="rating-container">
+                            <span class="stars">⭐</span>
+                            <span class="rating-value">${fruit.rating}</span>
+                            <span class="review-count">(${fruit.reviews} ulasan)</span>
                         </div>
                         <span class="price">Rp ${fruit.price.toLocaleString()} / ${fruit.unit}</span>
                         <button class="btn-buy" onclick="addToCart(${fruit.id})" ${fruit.stock === 0 ? 'disabled' : ''}>
